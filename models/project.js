@@ -28,7 +28,8 @@ const projectSchema = new mongoose.Schema({
         default: 0
     },
     category: {
-
+        type: categorySchema,
+        required: true
     },
     type: {
         type: typeSchema,
@@ -37,11 +38,11 @@ const projectSchema = new mongoose.Schema({
 
 },{timestamps: true});
 
-const Projects = mongoose.model("Projects", projectSchema);
+const Project = mongoose.model("Projects", projectSchema);
 
 function validateProject(project) {
     const schema = Joi.object({
-        name: Joi.string().min(3).max(50).trim().required(),
+        name: Joi.string().min(3).max(200).trim().required(),
         image: Joi.string().trim(),
         architectId: Joi.string().required(),
         ratingId: Joi.string().required(),
@@ -51,6 +52,6 @@ function validateProject(project) {
     return schema.validate(project)
 }
 
-exports.Projects = Projects;
+exports.Project = Project;
 exports.validate = validateProject;
 exports.projectsSchema = projectSchema;

@@ -6,6 +6,7 @@ const ratingSchema = new mongoose.Schema({
         type: Number,
         required: true,
         trim:true,
+        default: 0
     }
 },{timestamps: true});
 
