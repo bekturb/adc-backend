@@ -9,7 +9,6 @@ const typeSchema = new mongoose.Schema({
         unique: true,
     }
 },{timestamps: true});
-
 function validateType(type) {
     const schema = Joi.object({
         typeOf: Joi.string().required().trim()

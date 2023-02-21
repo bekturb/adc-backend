@@ -12,6 +12,13 @@ class CategoryController {
         const {error} = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message)
 
+        let project = await Project.findOne({
+            name: req.body.name,
+        });
+
+        if (project)
+            return res.status(400).send('This project is already exists');
+
         const architect = await Architect.findById(req.body.architectId)
         if (!architect)
             return res.status(400).send("Not found architect");
@@ -32,7 +39,7 @@ class CategoryController {
         let fileName = uuid.v4() + ".jpg";
         image.mv(path.resolve(__dirname, "..", "static", fileName))
 
-        let project = await Project.findOne({
+        project = new Project({
             name: req.body.name,
             image: fileName,
             architect: {
@@ -52,29 +59,24 @@ class CategoryController {
                 name: type.typeOf
             },
         });
-        if (project)
-            return res.status(400).send('This project is already exists');
 
-        project = new Project({
-            name: req.body.name
-        });
         project = await project.save();
         res.status(201).send(project)
     }
 
     async getAll(req, res) {
-        const categories = await Project.find().sort("name");
-        res.send(categories)
+        const projects = await Project.find().sort("name");
+        res.send(projects)
     }
 
     async getOne(req, res) {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
             return res.status(404).send("Invalid Id");
 
-        let category = await Project.findById(req.params.id);
-        if (!category) return res.status(404).send("No category for the given Id");
+        let project = await Project.findById(req.params.id);
+        if (!project) return res.status(404).send("No project for the given Id");
 
-        res.send(category)
+        res.send(project)
     }
 
     async update(req, res) {
@@ -84,23 +86,69 @@ class CategoryController {
         const {error} = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
 
-        let category = await Project.findByIdAndUpdate(req.params.id, {
-            name: req.body.name
+        let project = await Project.findOne({
+            name: req.body.name,
+        });
+
+        if (project)
+            return res.status(400).send('This project is already exists');
+
+        const architect = await Architect.findById(req.body.architectId)
+        if (!architect)
+            return res.status(400).send("Not found architect");
+
+        const rating = await Rating.findById(req.body.ratingId)
+        if (!rating)
+            return res.status(400).send("Not found rating");
+
+        const category = await Category.findById(req.body.categoryId)
+        if (!category)
+            return res.status(400).send("Not found category");
+
+        const type = await Type.findById(req.body.typeId)
+        if (!type)
+            return res.status(400).send("Not found type");
+
+        const {image} = req.files
+        let fileName = uuid.v4() + ".jpg";
+        image.mv(path.resolve(__dirname, "..", "static", fileName))
+
+        project = await Project.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            image: fileName,
+            architect: {
+                _id: architect._id,
+                firstName: architect.firstName
+            },
+            rating: {
+                _id: rating._id,
+                rate: rating.rate
+            },
+            category: {
+                _id: category._id,
+                name: category.name
+            },
+            type: {
+                _id: type._id,
+                name: type.typeOf
+            },
         }, {
             new: true
         })
-        if (!category)
-            return res.status(404).send("No category for the given Id");
-        res.send(category)
+
+        if (!project)
+            return res.status(404).send("No project for the given Id");
+
+        res.send(project)
     }
 
     async delete(req, res) {
         if (!mongoose.Types.ObjectId.isValid(req.params.id))
             return res.status(404).send("Invalid Id");
-        let category = await Project.findByIdAndRemove(req.params.id);
-        if (!category)
-            return res.status(404).send("No category for the given Id");
-        res.send(category)
+        let project = await Project.findByIdAndRemove(req.params.id);
+        if (!project)
+            return res.status(404).send("No project for the given Id");
+        res.send(project)
     }
 }
 
