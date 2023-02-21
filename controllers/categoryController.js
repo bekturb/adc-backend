@@ -38,6 +38,7 @@ class CategoryController {
 
         const {error} = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
+
         let category = await Category.findByIdAndUpdate(req.params.id, {
             name: req.body.name
         }, {

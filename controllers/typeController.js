@@ -18,7 +18,7 @@ class TypeController {
     }
 
     async getAll(req, res) {
-        const types = await Type.find().sort("name");
+        const types = await Type.find().sort("typeOf");
         res.send(types)
     }
 

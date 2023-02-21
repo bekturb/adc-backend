@@ -23,7 +23,6 @@ class UserController {
     async update(req, res) {
 
     }
-
     async delete(req, res) {
 
     }

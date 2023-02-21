@@ -23,6 +23,7 @@ const architectSchema = new mongoose.Schema({
     image: {
        type: String,
         trim: true,
+        required: true
     },
     bio: {
         type: String,
@@ -33,11 +34,11 @@ const architectSchema = new mongoose.Schema({
 
 function validateArchitect(architect) {
     const schema = Joi.object({
-        firstname: Joi.string().min(3).max(50).trim().required(),
-        lastname: Joi.string().min(3).max(50).trim().required(),
+        firstname: Joi.string().min(3).max(200).trim().required(),
+        lastname: Joi.string().min(3).max(200).trim().required(),
         dateOfBirth: Joi.date(),
         image: Joi.string().trim(),
-        bio: Joi.string().min(3).max(50),
+        bio: Joi.string().min(3).max(1000),
     });
     return schema.validate(architect)
 }

@@ -24,15 +24,11 @@ const projectSchema = new mongoose.Schema({
     },
     rating: {
         type: ratingSchema,
-        required: true
+        required: true,
+        default: 0
     },
     category: {
-        type: String,
-        required: [true, 'Please add a category Name'],
-        minLength: 3,
-        maxLength: 50,
-        trim: true,
-        enum: ["Architecture", "Design"],
+
     },
     type: {
         type: typeSchema,

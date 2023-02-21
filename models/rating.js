@@ -3,15 +3,16 @@ const Joi = require("joi");
 
 const ratingSchema = new mongoose.Schema({
     rate:{
-        type: String,
-        required: true
+        type: Number,
+        required: true,
+        trim:true,
     }
 },{timestamps: true});
 
 const Rating = mongoose.model("Ratings", ratingSchema);
 function validateRating(rating) {
     const schema = Joi.object({
-        rate: Joi.string().required()
+        rate: Joi.number().required()
     });
     return schema.validate(rating)
 }
