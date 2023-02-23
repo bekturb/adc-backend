@@ -7,7 +7,7 @@ const mongoose = require("mongoose")
 const uuid = require("uuid");
 const path = require("path");
 
-class CategoryController {
+class ProjectController {
     async create(req, res) {
         const {error} = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message)
@@ -44,7 +44,8 @@ class CategoryController {
             image: fileName,
             architect: {
                 _id: architect._id,
-                firstName: architect.firstName
+                firstname: architect.firstname,
+                lastname: architect.lastname
             },
             rating: {
                 _id: rating._id,
@@ -56,7 +57,7 @@ class CategoryController {
             },
             type: {
                 _id: type._id,
-                name: type.typeOf
+                typeName: type.typeName
             },
         });
 
@@ -107,7 +108,7 @@ class CategoryController {
 
         const type = await Type.findById(req.body.typeId)
         if (!type)
-            return res.status(400).send("Not found type");
+            return res.status(400).send("Not found design");
 
         const {image} = req.files
         let fileName = uuid.v4() + ".jpg";
@@ -118,7 +119,8 @@ class CategoryController {
             image: fileName,
             architect: {
                 _id: architect._id,
-                firstName: architect.firstName
+                firstname: architect.firstname,
+                lastname: architect.lastname
             },
             rating: {
                 _id: rating._id,
@@ -130,7 +132,7 @@ class CategoryController {
             },
             type: {
                 _id: type._id,
-                name: type.typeOf
+                typeName: type.typeName
             },
         }, {
             new: true
@@ -152,4 +154,4 @@ class CategoryController {
     }
 }
 
-module.exports = new CategoryController()
+module.exports = new ProjectController()

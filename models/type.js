@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const typeSchema = new mongoose.Schema({
-    typeOf: {
+    typeName: {
         type: String,
-        required: true,
-        trim: true,
-        unique: true,
+        required: [true, 'Please add a typeName'],
+        enum:["exterior", "interior"],
+        lowercase: true
     }
 },{timestamps: true});
 function validateType(type) {
     const schema = Joi.object({
-        typeOf: Joi.string().required().trim()
+        typeName: Joi.string().required().trim().valid("interior", "exterior")
     });
     return schema.validate(type)
 }
 
-const Type = mongoose.model("Type", typeSchema);
+const Type = mongoose.model("Types", typeSchema);
 
 exports.Type = Type;
 exports.validate = validateType;

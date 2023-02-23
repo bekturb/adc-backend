@@ -4,14 +4,14 @@ const Joi = require("joi");
 const architectSchema = new mongoose.Schema({
     firstname: {
         type: String,
-        required: [true, 'Please add a architect firstname'],
+        required: true,
         minLength: 3,
         maxLength: 200,
         trim: true,
     },
     lastname: {
         type: String,
-        required: [true, 'Please add a architect lastname'],
+        required:true,
         minLength: 3,
         maxLength: 200,
         trim: true,
@@ -23,7 +23,6 @@ const architectSchema = new mongoose.Schema({
     image: {
        type: String,
         trim: true,
-        required: true
     },
     bio: {
         type: String,

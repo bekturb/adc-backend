@@ -4,21 +4,21 @@ const mongoose = require("mongoose")
 class TypeController {
     async create(req, res) {
         const {error} = validate(req.body);
-        if (error) return res.status(400).send(error.details[0].message)
+        if (error) return res.status(400).send(error.details[0].message);
 
-        let type = await Type.findOne({ typeOf: req.body.typeOf });
+        let type = await Type.findOne({ typeName: req.body.typeName });
         if (type)
-            return res.status(400).send('This type is already exists');
+            return res.status(400).send('This typeName is already exists');
 
         type = new Type({
-            typeOf: req.body.typeOf
+            typeName: req.body.typeName
         });
         type = await type.save();
         res.status(201).send(type)
     }
 
     async getAll(req, res) {
-        const types = await Type.find().sort("typeOf");
+        const types = await Type.find().sort("typeName");
         res.send(types)
     }
 
@@ -38,8 +38,9 @@ class TypeController {
 
         const {error} = validate(req.body);
         if (error) return res.status(400).send(error.details[0].message);
+
         let type = await Type.findByIdAndUpdate(req.params.id, {
-            typeOf: req.body.typeOf
+            typeName: req.body.typeName
         }, {
             new: true
         })
@@ -53,7 +54,7 @@ class TypeController {
             return res.status(404).send("Invalid Id");
         let type = await Type.findByIdAndRemove(req.params.id);
         if (!type)
-        return res.status(404).send("No type for the given Id");
+            return res.status(404).send("No type for the given Id");
         res.send(type)
     }
 }

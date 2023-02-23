@@ -5,17 +5,14 @@ const categorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Please add a category Name'],
-        minLength: 3,
-        maxLength: 50,
-        unique: true,
         enum:["architecture", "design"],
         lowercase: true
-    }
+    },
 },{timestamps: true});
 
 function validateCategory(category) {
     const schema = Joi.object({
-        name: Joi.string().required().trim().valid("architecture", "design").max(50).min(3)
+        name: Joi.string().required().trim().valid("architecture", "design")
     });
     return schema.validate(category)
 }

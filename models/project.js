@@ -1,17 +1,25 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const {categorySchema} = require("./category");
-const {architectSchema} = require("./architect");
-const {ratingSchema} = require("./rating");
-const {typeSchema} = require("./type");
+const { categorySchema } = require("./category");
+const { architectSchema } = require("./architect");
+const { ratingSchema } = require("./rating");
+const { typeSchema } = require("./type");
 
 const projectSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please add a user Name'],
+        required: [true, 'Please add a project name'],
         minLength: 3,
         maxLength: 200,
         trim: true,
+    },
+    category: {
+        type: categorySchema,
+        required: true
+    },
+    type: {
+        type: typeSchema,
+        required: true
     },
     image: {
         type: String,
@@ -27,18 +35,8 @@ const projectSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    category: {
-        type: categorySchema,
-        required: true
-    },
-    type: {
-        type: typeSchema,
-        required: true
-    }
 
 },{timestamps: true});
-
-const Project = mongoose.model("Projects", projectSchema);
 
 function validateProject(project) {
     const schema = Joi.object({
@@ -51,6 +49,9 @@ function validateProject(project) {
     });
     return schema.validate(project)
 }
+
+const Project = mongoose.model("Projects", projectSchema);
+
 
 exports.Project = Project;
 exports.validate = validateProject;
