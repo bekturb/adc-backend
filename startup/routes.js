@@ -1,6 +1,7 @@
 const express = require("express");
 const errorMiddleware = require("../middlewares/error")
 const cors = require("cors");
+const path = require("path")
 const fileUpload = require("express-fileupload");
 const typesRoute = require("../routes/types")
 const userRoute = require("../routes/users")
@@ -13,6 +14,7 @@ const roomRoute = require("../routes/rooms")
 module.exports = function (app) {
     app.use(cors());
     app.use(express.json());
+    app.use(express.static("static"))
     app.use(fileUpload({}));
     app.use('/api/users', userRoute);
     app.use('/api/types', typesRoute);

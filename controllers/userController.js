@@ -1,4 +1,6 @@
 const {User, validate} = require("../models/user")
+const bcrypt  = require("bcrypt");
+const _ = require("lodash");
 class UserController {
     async create(req, res) {
 
@@ -10,19 +12,17 @@ class UserController {
         if (user)
             return res.status(400).send('This email is already exists');
 
-         user = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            role: req.body.role,
-        });
+        user = new User(_.pick(req.body, ["firstName","lastName","email","password"]));
+        const salt = await bcrypt.genSalt();
+        user.password = await bcrypt.hash(user.password, salt)
         user = await user.save();
-        res.status(201).send(user)
+        res.status(201).send(_.pick(user, ["_id","firstName","lastName","email"]))
     }
 
     async getAll(req, res) {
-        const users = await User.find().sort("firstName");
+        const users = await User.find()
+            .sort("firstName")
+            .select({password: 0})
         res.send(users)
     }
 }
