@@ -4,6 +4,7 @@ const { categorySchema } = require("./category");
 const { architectSchema } = require("./architect");
 const { ratingSchema } = require("./rating");
 const { typeSchema } = require("./type");
+const {roomSchema} = require("./room");
 
 const projectSchema = new mongoose.Schema({
     name: {
@@ -20,6 +21,10 @@ const projectSchema = new mongoose.Schema({
     type: {
         type: typeSchema,
         required: true
+    },
+    room: {
+        type: roomSchema,
+        required: true,
     },
     image: {
         type: String,
@@ -45,7 +50,8 @@ function validateProject(project) {
         architectId: Joi.string().required(),
         ratingId: Joi.string().required(),
         categoryId: Joi.string().required(),
-        typeId: Joi.string().required()
+        typeId: Joi.string().required(),
+        roomId: Joi.string().required()
     });
     return schema.validate(project)
 }

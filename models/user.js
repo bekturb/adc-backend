@@ -1,8 +1,21 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const bcrypt  = require("bcrypt");
+const _ = require("lodash");
+
+const validateEmail = function(email) {
+    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email)
+};
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
+        type: String,
+        required: true,
+        minlength: 3,
+        maxlength: 50
+    },
+    lastName: {
         type: String,
         required: true,
         minlength: 3,
@@ -10,10 +23,12 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
         required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true
+        validate: [validateEmail, 'Please fill a valid email address'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     password: {
         type: String,
@@ -23,7 +38,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: "USER"
+        default: "USER",
+        enum: ["USER", "ADMIN"]
     }
 });
 
@@ -31,10 +47,11 @@ const User = mongoose.model("User", userSchema);
 
 function validateUser(user) {
     const schema = Joi.object({
-        name: Joi.string().min(3).max(50).required(),
+        firstName: Joi.string().min(3).max(50).required(),
+        lastName: Joi.string().min(3).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
         password: Joi.string().min(5).max(255).required(),
-        role: Joi.string().required()
+        role: Joi.string()
     });
 
     return schema.validate(user);

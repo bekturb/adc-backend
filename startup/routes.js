@@ -8,6 +8,7 @@ const categoryRoute = require("../routes/categories")
 const ratingRoute = require("../routes/ratings")
 const architectRoute = require("../routes/architects")
 const projectRoute = require("../routes/projects")
+const roomRoute = require("../routes/rooms")
 
 module.exports = function (app) {
     app.use(cors());
@@ -19,5 +20,6 @@ module.exports = function (app) {
     app.use('/api/ratings', ratingRoute);
     app.use('/api/architects', architectRoute);
     app.use('/api/projects', projectRoute);
+    app.use('/api/rooms', roomRoute);
     app.use(errorMiddleware);
 }

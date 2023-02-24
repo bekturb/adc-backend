@@ -3,6 +3,7 @@ const {Architect} = require("../models/architect")
 const {Rating} = require("../models/rating")
 const {Category} = require("../models/category")
 const {Type} = require("../models/type")
+const {Room} = require("../models/room");
 const mongoose = require("mongoose")
 const uuid = require("uuid");
 const path = require("path");
@@ -35,6 +36,10 @@ class ProjectController {
         if (!type)
             return res.status(400).send("Not found type");
 
+        const room = await Room.findById(req.body.roomId)
+        if (!room)
+            return res.status(400).send("Not found room");
+
         const {image} = req.files
         let fileName = uuid.v4() + ".jpg";
         image.mv(path.resolve(__dirname, "..", "static", fileName))
@@ -58,6 +63,10 @@ class ProjectController {
             type: {
                 _id: type._id,
                 typeName: type.typeName
+            },
+            room: {
+                _id: room._id,
+                quantity: room.quantity
             },
         });
 
@@ -110,6 +119,10 @@ class ProjectController {
         if (!type)
             return res.status(400).send("Not found design");
 
+        const room = await Room.findById(req.body.roomId)
+        if (!room)
+            return res.status(400).send("Not found room");
+
         const {image} = req.files
         let fileName = uuid.v4() + ".jpg";
         image.mv(path.resolve(__dirname, "..", "static", fileName))
@@ -133,6 +146,10 @@ class ProjectController {
             type: {
                 _id: type._id,
                 typeName: type.typeName
+            },
+            room: {
+                _id: room._id,
+                quantity: room.quantity
             },
         }, {
             new: true

@@ -1,6 +1,5 @@
 const {Type, validate} = require("../models/type")
 const mongoose = require("mongoose")
-
 class TypeController {
     async create(req, res) {
         const {error} = validate(req.body);
