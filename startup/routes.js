@@ -1,7 +1,6 @@
 const express = require("express");
 const errorMiddleware = require("../middlewares/error")
 const cors = require("cors");
-const path = require("path")
 const fileUpload = require("express-fileupload");
 const typesRoute = require("../routes/types")
 const userRoute = require("../routes/users")
@@ -11,6 +10,7 @@ const architectRoute = require("../routes/architects")
 const projectRoute = require("../routes/projects")
 const roomRoute = require("../routes/rooms")
 const projectInfoRoute = require("../routes/projectInfos")
+const authRoute = require("../routes/auth")
 
 module.exports = function (app) {
     app.use(cors());
@@ -25,5 +25,6 @@ module.exports = function (app) {
     app.use('/api/projects', projectRoute);
     app.use('/api/rooms', roomRoute);
     app.use('/api/project-info', projectInfoRoute);
+    app.use('/api/login', authRoute);
     app.use(errorMiddleware);
 }

@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "myprivatekey4oradcpr0jec7",
+  "db": "mongodb://localhost/adc-backend"
+}

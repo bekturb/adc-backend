@@ -1,5 +1,5 @@
 const {Category, validate} = require("../models/category")
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 class CategoryController {
     async create(req, res) {
