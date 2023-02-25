@@ -17,7 +17,7 @@ const projectInfoSchema = new mongoose.Schema({
     }
 },{timestamps: true});
 
-const ProjectInfo = mongoose.model("ProjectsInfo", projectsSchema);
+const ProjectInfo = mongoose.model("ProjectsInfo", projectInfoSchema);
 
 function validateProjectInfo(projectInfo) {
     const schema = Joi.object({
