@@ -1,6 +1,7 @@
 const {User, validate} = require("../models/user")
 const bcrypt  = require("bcrypt");
 const _ = require("lodash");
+
 class UserController {
 
     async getMe(req, res) {
