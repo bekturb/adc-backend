@@ -10,6 +10,7 @@ const architectRoute = require("../routes/architects")
 const projectRoute = require("../routes/projects")
 const roomRoute = require("../routes/rooms")
 const projectInfoRoute = require("../routes/projectInfos")
+const projectFavoriteRoute = require("../routes/projectFavorites")
 const authRoute = require("../routes/auth")
 
 module.exports = function (app) {
@@ -25,6 +26,7 @@ module.exports = function (app) {
     app.use('/api/projects', projectRoute);
     app.use('/api/rooms', roomRoute);
     app.use('/api/project-info', projectInfoRoute);
+    app.use('/api/project-favorite', projectFavoriteRoute);
     app.use('/api/login', authRoute);
     app.use(errorMiddleware);
 }
