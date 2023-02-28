@@ -1,4 +1,4 @@
 {
-  "jwtPrivateKey": "1234",
-  "db": "mongodb://localhost:27019/?replicaSet=rs"
+  "jwtPrivateKey": "",
+  "db": "mongodb+srv://adc-project:beka100599@cluster0.qg4kwxa.mongodb.net/?retryWrites=true&w=majority"
 }
