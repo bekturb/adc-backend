@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "adc-backend_jwtPrivateKey"
+  "jwtPrivateKey": "adc-backend_jwtPrivateKey",
+  "db": "project_connstring"
 }
