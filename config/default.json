@@ -1,4 +1,5 @@
 {
   "jwtPrivateKey": "",
-  "db": "mongodb+srv://adc-project:beka100599@cluster0.qg4kwxa.mongodb.net/?retryWrites=true&w=majority"
+  "db": "mongodb+srv://adc-project:beka100599@cluster0.qg4kwxa.mongodb.net/?retryWrites=true&w=majority",
+  "PORT": 8080
 }

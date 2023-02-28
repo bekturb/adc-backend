@@ -1,4 +1,5 @@
 {
   "jwtPrivateKey": "adc-backend_jwtPrivateKey",
-  "db": "METEOR_SETTINGS"
+  "db": "METEOR_SETTINGS",
+  "PORT": "my_port"
 }
