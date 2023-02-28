@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "",
-  "db": "mongodb://localhost:27019/adc-project"
+  "db": "mongodb+srv://bektursunBaimamatov:bekakyrgyz100599@cluster0.qg4kwxa.mongodb.net/?retryWrites=true"
 }

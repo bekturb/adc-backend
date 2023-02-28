@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "adc-backend_jwtPrivateKey",
-  "db": "project_connstring"
+  "db": "METEOR_SETTINGS"
 }
