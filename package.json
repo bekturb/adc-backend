@@ -27,6 +27,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.9.1",
     "uuid": "^9.0.0",
+    "vercel": "^28.16.7",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.1"
   },
