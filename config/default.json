@@ -1,5 +1,0 @@
-{
-  "jwtPrivateKey": "1234",
-  "db": "mongodb://beka:beka1234@ac-tfddbld-shard-00-00.ev0sd7c.mongodb.net:27017,ac-tfddbld-shard-00-01.ev0sd7c.mongodb.net:27017,ac-tfddbld-shard-00-02.ev0sd7c.mongodb.net:27017/?ssl=true&replicaSet=atlas-qbt3mj-shard-0&authSource=admin&retryWrites=true&w=majority",
-  "PORT": 8080
-}

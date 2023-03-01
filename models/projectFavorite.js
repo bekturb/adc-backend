@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const {projectsSchema} = require("./project");
-const {favoriteSchema} = require("./favorite");
 
 const projectFavoriteSchema = new mongoose.Schema({
     projectId: {

@@ -1,7 +1,7 @@
-const config = require('config');
+require("dotenv").config()
 
 module.exports = function () {
-    if (!config.get('jwtPrivateKey')) {
+    if (!process.env.PRIVATEKEY) {
         throw new Error('Unexpected error: adc-project_jwtPrivateKey is undefined.');
     }
 }
