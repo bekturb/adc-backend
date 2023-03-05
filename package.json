@@ -7,8 +7,7 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "16.16.0",
-    "npm": "9.5.0"
+    "node": "18.14.2"
   },
   "keywords": [],
   "author": "Baimamatov Bektursun",
