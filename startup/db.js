@@ -6,7 +6,6 @@ module.exports = function () {
     mongoose.set("strictQuery", true);
     mongoose.connect(process.env.DB_HOST, {
         useUnifiedTopology: true,
-        replicaSet: "rs",
     })
         .then(() => {
             winston.debug('Successfully connected to mongodb');
