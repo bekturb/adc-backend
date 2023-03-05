@@ -22,7 +22,7 @@ class ArchitectController {
     }
 
     async getAll(req, res) {
-        const architects = await Architect.find().sort("firstName");
+        const architects = await Architect.find().sort("firstname");
         res.send(architects)
     }
 
