@@ -1,0 +1,5 @@
+{
+  "jwtPrivateKey": "adc-mern_jwtPrivateKey",
+  "db": "adc-mern_host",
+  "port": "adc-mern_port"
+}
