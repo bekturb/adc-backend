@@ -1,10 +1,10 @@
-const config = require("config")
+require("dotenv").config()
 const mongoose = require('mongoose');
 const winston = require('winston');
 
 module.exports = function () {
     mongoose.set("strictQuery", true);
-    mongoose.connect(config.get("db"), {
+    mongoose.connect(process.env.DB_HOST, {
         useUnifiedTopology: true,
     })
         .then(() => {
