@@ -6,7 +6,7 @@ module.exports = function auth(req, res, next) {
     if (!token)
         return res.status(401).send("Token doesn\'t exist");
      try{
-         const decoded = jwt.verify(token, process.env.PRIVATEKEY);
+         const decoded = jwt.verify(token, process.env.JWTPRIVATEKEY);
          req.user = decoded;
          next();
      }catch (err){
