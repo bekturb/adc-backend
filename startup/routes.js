@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 const typesRoute = require("../routes/types")
 const userRoute = require("../routes/users")
 const categoryRoute = require("../routes/categories")
+const squareRoutes = require("../routes/squares")
 const ratingRoute = require("../routes/ratings")
 const architectRoute = require("../routes/architects")
 const projectRoute = require("../routes/projects")
@@ -21,6 +22,7 @@ module.exports = function (app) {
     app.use('/api/users', userRoute);
     app.use('/api/types', typesRoute);
     app.use('/api/categories', categoryRoute);
+    app.use('/api/squares', squareRoutes);
     app.use('/api/ratings', ratingRoute);
     app.use('/api/architects', architectRoute);
     app.use('/api/projects', projectRoute);
